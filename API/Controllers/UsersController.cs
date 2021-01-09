@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
-            return _contex.Users.Find(id);
+            return await _contex.Users.FindAsync(id);
         }
     }
 }
