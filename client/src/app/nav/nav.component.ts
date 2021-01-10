@@ -11,6 +11,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   title = 'ToDo App'
   model: any={}
+  currentUserUsername = '';
 
   constructor(public accountService: AccountService) { }
 
@@ -19,6 +20,7 @@ export class NavComponent implements OnInit {
 
   login(){
     this.accountService.login(this.model).subscribe(response => {
+      this.currentUserUsername = this.model.username;
       console.log(response);
     }, error => {
       console.log(error);
@@ -26,6 +28,7 @@ export class NavComponent implements OnInit {
   }
 
   logout(){
+    this.currentUserUsername = '';
     this.accountService.logout();
   }
 
