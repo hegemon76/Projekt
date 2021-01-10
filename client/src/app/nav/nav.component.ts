@@ -21,7 +21,7 @@ export class NavComponent implements OnInit {
   login(){
     this.accountService.login(this.model).subscribe(response => {
       this.currentUserUsername = this.model.username;
-      console.log(response);
+      console.log(this.model);
     }, error => {
       console.log(error);
     });
