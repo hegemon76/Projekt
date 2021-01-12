@@ -42,12 +42,17 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("API.Entities.ToDoItem", b =>
@@ -74,7 +79,18 @@ namespace API.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ToDoItem");
+                    b.ToTable("ToDoItems");
+                });
+
+            modelBuilder.Entity("API.Entities.Category", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Categories")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("API.Entities.ToDoItem", b =>
@@ -98,6 +114,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Categories");
+
                     b.Navigation("ToDoItems");
                 });
 
