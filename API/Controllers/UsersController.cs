@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -40,16 +41,33 @@ namespace API.Controllers
             
         }
 
+        
         [HttpGet("{id}/categories")]
         public ActionResult<UserCategoriesDto> GetUSerCategories(int id)
         {
-            var user = _contex.Users.Where(u => u.Id == id).Include(c => c.Categories).FirstOrDefault();
-            List<string> categoryName = user.Categories.Select(cat => cat.Name).ToList();
+            var user =  _contex.Users.Where(u => u.Id == id).Include(c => c.Categories).FirstOrDefault();
+             List<string> categoryName = user.Categories.Select(cat => cat.Name).ToList();
             return new UserCategoriesDto
             {
                 CategoryNames = categoryName
             };
-            //return await _contex.Users.Include(c => c.Categories).Where(u => u.Id == id).ToListAsync();
+        }
+
+        [HttpGet("{id}/items")]
+        public ActionResult<UserToDoItems> GetUSerToDoItems(int id)
+        {
+            Dictionary<string, string> items2 = new Dictionary<string, string>();
+            var user = _contex.Users.Where(u => u.Id == id).Include(c => c.ToDoItems).ThenInclude(x => x.Category).FirstOrDefault();
+           // UserToDoItems items = new UserToDoItems();
+            List<string> toDoItemName = user.ToDoItems.Select(item => item.Description).ToList();
+            for (int i = 0; i < toDoItemName.Count; i++)
+            {
+                items2.Add(user.ToDoItems.ToList(), user.Categories[i]);
+            }
+            return new UserToDoItems
+            {
+                Description = toDoItemName
+            };
         }
     }
 }
