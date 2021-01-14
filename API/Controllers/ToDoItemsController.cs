@@ -80,37 +80,41 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoItemCreateDto>> PostToDoItem(ToDoItemCreateDto toDoItemCreateDto)
         {
+            var user = _context.Users.Include(c => c.Categories).FirstOrDefault(x => x.UserName.ToLower() == toDoItemCreateDto.UserName.ToLower());
+            var cat = user.Categories.FirstOrDefault(x => x.Name == toDoItemCreateDto.CategoryName);
             var item = new ToDoItem
             {
-                CategoryId = toDoItemCreateDto.CategoryId,
-                AppUserId = toDoItemCreateDto.AppUserId,
+                AppUser = user,
+                CategoryId = cat.Id,
+                AppUserId = user.Id,
                 Description = toDoItemCreateDto.Description,
-                Category = _context.Users.Include(c => c.Categories).Select(x => x.Categories)
+                Category = cat
             };
 
             _context.ToDoItems.Add(item);
-            await AddToSpecifiedUserToDoItem(toDoItemCreateDto.AppUserId, item);
-            await AddToSpecifiedCategory(toDoItemCreateDto.CategoryId, item);
+
+            await AddToSpecifiedUserToDoItem(user.Id, item);
+            await AddToSpecifiedCategory(cat.Id, item);
             await _context.SaveChangesAsync();
 
             return new ToDoItemCreateDto
             {
                 Description = toDoItemCreateDto.Description,
-                AppUserId = toDoItemCreateDto.AppUserId,
-                CategoryId = toDoItemCreateDto.CategoryId,
+                UserName = toDoItemCreateDto.UserName,
+                CategoryName = toDoItemCreateDto.CategoryName
             };
         }
 
         private async Task AddToSpecifiedUserToDoItem(int id, ToDoItem toDoItem)
         {
-            var user = await _context.Users.SingleAsync(x => x.Id == id);
+            var user = await _context.Users.Include(c => c.Categories).SingleAsync(x => x.Id == id);
             user.ToDoItems.Add(toDoItem);
             await _context.SaveChangesAsync();
         }
 
         private async Task AddToSpecifiedCategory(int id, ToDoItem toDoItem)
         {
-            var category = await _context.Categories.SingleAsync(x => x.Id == id);
+            var category = await _context.Categories.Include(i => i.ToDoItems).SingleAsync(x => x.Id == id);
             category.ToDoItems.Add(toDoItem);
             await _context.SaveChangesAsync();
         }

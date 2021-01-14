@@ -39,22 +39,24 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryDto>> AddCategory(CategoryDto categoryDto)
         {
+            var user = _context.Users.FirstOrDefault(x => x.UserName.ToLower() == categoryDto.UserName.ToLower());
             var category = new Category
             {
-                AppUserId = categoryDto.AppUserId,
+                AppUser = user,
+                AppUserId = user.Id,
                 Name = categoryDto.Name,
             };
 
             _context.Categories.Add(category);
 
-            await AddCategoryToUser(categoryDto.AppUserId, category);
+            await AddCategoryToUser(user.Id, category);
 
             _context.SaveChanges();
 
             return new CategoryDto
             {
+                UserName = categoryDto.UserName,
                 Name = categoryDto.Name,
-                AppUserId = categoryDto.AppUserId
             };
         }
 

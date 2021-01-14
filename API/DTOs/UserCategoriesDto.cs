@@ -8,6 +8,7 @@ namespace API.DTOs
 {
     public class UserCategoriesDto
     {
-        public List<string> CategoryNames { get; set; }
+        public string Category { get; set; }
+        public int ToDos { get; set; }
     }
 }

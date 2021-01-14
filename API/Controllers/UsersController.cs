@@ -9,6 +9,7 @@ using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace API.Controllers
 {
@@ -31,43 +32,49 @@ namespace API.Controllers
         }
 
         // api/users/2
-       // [Authorize]
+        // [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             var user = _contex.Users.First(x => x.Id == id);
 
             return await _contex.Users.FindAsync(id);
-            
+
         }
 
-        
-        [HttpGet("{id}/categories")]
-        public ActionResult<UserCategoriesDto> GetUSerCategories(int id)
+
+        [HttpGet("{username}/categories")]
+        public ActionResult<List<UserCategoriesDto>> GetUserCategories(string username)
         {
-            var user =  _contex.Users.Where(u => u.Id == id).Include(c => c.Categories).FirstOrDefault();
-             List<string> categoryName = user.Categories.Select(cat => cat.Name).ToList();
-            return new UserCategoriesDto
+            var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
+                .Include(c => c.Categories)
+                .ThenInclude(t => t.ToDoItems)
+                .FirstOrDefault();
+
+            var cats = user.Categories.Select(item =>
+            new UserCategoriesDto
             {
-                CategoryNames = categoryName
-            };
+                Category = item.Name,
+                ToDos = item.ToDoItems.Count
+            }).ToList();
+
+            return cats;
         }
 
         [HttpGet("{id}/items")]
-        public ActionResult<UserToDoItems> GetUSerToDoItems(int id)
+        public ActionResult<List<ToDoItemDto>> GetUserToDoItems(int id)
         {
-            Dictionary<string, string> items2 = new Dictionary<string, string>();
             var user = _contex.Users.Where(u => u.Id == id).Include(c => c.ToDoItems).ThenInclude(x => x.Category).FirstOrDefault();
-           // UserToDoItems items = new UserToDoItems();
-            List<string> toDoItemName = user.ToDoItems.Select(item => item.Description).ToList();
-            for (int i = 0; i < toDoItemName.Count; i++)
+
+            var todos = user.ToDoItems.Select(item =>
+            new ToDoItemDto
             {
-                items2.Add(user.ToDoItems.ToList(), user.Categories[i]);
-            }
-            return new UserToDoItems
-            {
-                Description = toDoItemName
-            };
+                Description = item.Description,
+                Category = item.Category.Name,
+                Created = item.CreatedAt.ToString("f")
+            }).ToList();
+
+            return todos;
         }
     }
 }

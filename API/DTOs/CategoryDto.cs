@@ -11,6 +11,6 @@ namespace API.DTOs
     {
         [Required]
         public string Name { get; set; }
-        public int AppUserId { get; set; }
+        public string UserName{ get; set; }
     }
 }
