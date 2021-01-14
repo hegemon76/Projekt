@@ -7,12 +7,10 @@ using API.Entities;
 
 namespace API.DTOs
 {
-    public class RegisterDto
+    public class CategoryDto
     {
         [Required]
-        public string Username { get; set; }
-
-        [Required]
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public string UserName{ get; set; }
     }
 }

@@ -13,7 +13,7 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
-
+  
   login(model: any){
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
@@ -31,7 +31,7 @@ export class AccountService {
       map((user: User) => {
         if(user) {
           localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          //this.currentUserSource.next(user);
         }
       })
     )
