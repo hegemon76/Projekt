@@ -1,0 +1,12 @@
+<div class="container">
+    <div *ngIf="!isCategoryDisplayed" class="col-5">
+        <ul *ngFor="let category of categories" class="list-group">
+            <button type="button" (click)="loadCategoryItems(category.category)" class="list-group-item d-flex justify-content-between align-items-center">
+              {{ category.category }}
+              <span class="badge badge-primary badge-pill">{{ category.toDos }}</span>
+            </button>
+          </ul>
+    </div>
+    <app-selected-category *ngIf="isCategoryDisplayed" 
+    [toDosFromCategoriesList]="categoryItems" (back)="cancelDisplayingItems()"></app-selected-category>
+</div>

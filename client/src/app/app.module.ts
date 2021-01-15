@@ -10,13 +10,17 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
+import { SelectedCategoryComponent } from './categories/selected-category/selected-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategoriesListComponent,
+    SelectedCategoryComponent
   ],
   imports: [
     BrowserModule,
