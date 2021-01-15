@@ -80,8 +80,13 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoItemCreateDto>> PostToDoItem(ToDoItemCreateDto toDoItemCreateDto)
         {
-            var user = _context.Users.Include(c => c.Categories).FirstOrDefault(x => x.UserName.ToLower() == toDoItemCreateDto.UserName.ToLower());
-            var cat = user.Categories.FirstOrDefault(x => x.Name == toDoItemCreateDto.CategoryName);
+            var user = _context.Users
+                .Include(c => c.Categories)
+                .FirstOrDefault(x => x.UserName.ToLower() == toDoItemCreateDto.UserName.ToLower());
+
+            var cat = user.Categories
+                .FirstOrDefault(x => x.Name == toDoItemCreateDto.CategoryName);
+
             var item = new ToDoItem
             {
                 AppUser = user,
@@ -90,7 +95,7 @@ namespace API.Controllers
                 Description = toDoItemCreateDto.Description,
                 Category = cat
             };
-
+            //TEST
             _context.ToDoItems.Add(item);
 
             await AddToSpecifiedUserToDoItem(user.Id, item);

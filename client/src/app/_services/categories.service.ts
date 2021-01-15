@@ -14,7 +14,7 @@ export class CategoriesService {
 
   getCategories() {
     var user = JSON.parse(localStorage.getItem('user')).username;
-    return this.http.get<UserCategory[]>(this.baseUrl +'users/' +user +'/categories')
+    return this.http.get<UserCategory[]>(this.baseUrl +'users/' + user +'/categories')
   }
 
   getToDoItems(categoryName){
