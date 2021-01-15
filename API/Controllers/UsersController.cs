@@ -68,10 +68,13 @@ namespace API.Controllers
             return cats;
         }
 
-        [HttpGet("{id}/items")]
-        public ActionResult<List<ToDoItemDto>> GetUserToDoItems(int id)
+        [HttpGet("{username}/items")]
+        public ActionResult<List<ToDoItemDto>> GetUserToDoItems(string username)
         {
-            var user = _contex.Users.Where(u => u.Id == id).Include(c => c.ToDoItems).ThenInclude(x => x.Category).FirstOrDefault();
+            var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
+                .Include(c => c.ToDoItems)
+                .ThenInclude(x => x.Category)
+                .FirstOrDefault();
 
             var todos = user.ToDoItems.Select(item =>
             new ToDoItemDto
@@ -79,7 +82,9 @@ namespace API.Controllers
                 Description = item.Description,
                 Category = item.Category.Name,
                 Created = item.CreatedAt.ToString("f")
-            }).ToList();
+            }).OrderBy(x => x.Category)
+            .ThenBy(y => y.Created)
+                .ToList();
 
             return todos;
         }
