@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { SelectedCategoryComponent } from './categories/selected-category/selected-category.component';
+import { TaskListComponent } from './todoitems/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SelectedCategoryComponent } from './categories/selected-category/select
     HomeComponent,
     RegisterComponent,
     CategoriesListComponent,
-    SelectedCategoryComponent
+    SelectedCategoryComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
