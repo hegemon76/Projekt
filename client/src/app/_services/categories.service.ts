@@ -4,12 +4,6 @@ import { environment } from 'src/environments/environment';
 import { UserCategory } from '../_models/userCategory';
 import { ToDoItem } from '../_models/ToDoItem';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
-  })
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +14,7 @@ export class CategoriesService {
 
   getCategories() {
     var user = JSON.parse(localStorage.getItem('user')).username;
-    return this.http.get<UserCategory[]>(this.baseUrl +'users/' +user +'/categories')
+    return this.http.get<UserCategory[]>(this.baseUrl +'users/' + user +'/categories')
   }
 
   getToDoItems(categoryName){
