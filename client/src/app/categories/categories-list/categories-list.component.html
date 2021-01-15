@@ -24,6 +24,8 @@
       </button>
     </ul>
   </div>
-  <app-selected-category *ngIf="isCategoryDisplayed" [toDosFromCategoriesList]="categoryItems"
-    (back)="cancelDisplayingItems()"></app-selected-category>
+  <app-selected-category *ngIf="isCategoryDisplayed" 
+  [toDosFromCategoriesList]="categoryItems"
+    (back)="cancelDisplayingItems($event)">
+  </app-selected-category>
 </div>
