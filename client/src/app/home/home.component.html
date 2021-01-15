@@ -1,11 +1,10 @@
 <div class="container mt-5">
-    <div *ngIf="!registerMode" style='text-align: center'>
-        <h1>Be more productive!</h1>
-        <p class="lead">Come on in to make some tasks! All you need to do is sing up!</p>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
-            <button class="btn btn-primary btn-lg">Learn more</button>
-        </div>
+    <div *ngIf="!registerMode" style='text-align: center' class="wrapper">
+        <h1>Witaj to aplikacji ToDo</h1>
+        <p class="lead">Jeżeli chcesz poprawić organizację swojego czasu zaloguj się a jeśli nie posiadasz jeszcze konta, możesz się śmiało zarejestrować</p>
+        <!--<div class="text-center">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Zarejestruj się</button>
+        </div>-->
     </div>
 
     <div *ngIf="registerMode" class="container">
