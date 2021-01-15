@@ -95,7 +95,7 @@ namespace API.Controllers
                 Description = toDoItemCreateDto.Description,
                 Category = cat
             };
-
+            //TEST
             _context.ToDoItems.Add(item);
 
             await AddToSpecifiedUserToDoItem(user.Id, item);
