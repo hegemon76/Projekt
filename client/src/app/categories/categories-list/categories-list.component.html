@@ -1,12 +1,29 @@
-<div class="container">
-    <div *ngIf="!isCategoryDisplayed" class="col-5">
-        <ul *ngFor="let category of categories" class="list-group">
-            <button type="button" (click)="loadCategoryItems(category.category)" class="list-group-item d-flex justify-content-between align-items-center">
-              {{ category.category }}
-              <span class="badge badge-primary badge-pill">{{ category.toDos }}</span>
-            </button>
-          </ul>
+<div *ngIf="!isCategoriesLoaded || !addCategoryToggle" class="container">
+  <form #categoryForm="ngForm" (ngSubmit)="addCategory()" autocomplete="off">
+    <p>Dodaj kategorie </p>
+    <hr>
+    <div class="form-group">
+      <input type="text" class="form-control" name="Name" 
+        [(ngModel)]="newCategory.Name" placeholder="Nazwa kategorii">
     </div>
-    <app-selected-category *ngIf="isCategoryDisplayed" 
-    [toDosFromCategoriesList]="categoryItems" (back)="cancelDisplayingItems()"></app-selected-category>
+    <div class="form-group text-center">
+      <button class="btn btn-success mr-2" type="submit">Dodaj kategorie</button>
+      <button class="btn btn-secondary mr-2" (click)="toggleAddCategory()">Anuluj</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="!isCategoriesLoaded || addCategoryToggle" class="container">
+  <button class="btn btn-primary" (click)="toggleAddCategory()">Dodaj Kategorie</button>
+  <div *ngIf="!isCategoryDisplayed" class="col-5">
+    <ul *ngFor="let category of categories" class="list-group">
+      <button type="button" (click)="loadCategoryItems(category.category)"
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{ category.category }}
+        <span class="badge badge-primary badge-pill">{{ category.toDos }}</span>
+      </button>
+    </ul>
+  </div>
+  <app-selected-category *ngIf="isCategoryDisplayed" [toDosFromCategoriesList]="categoryItems"
+    (back)="cancelDisplayingItems()"></app-selected-category>
 </div>

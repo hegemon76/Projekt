@@ -58,6 +58,8 @@ namespace API.Controllers
                 .ThenInclude(t => t.ToDoItems)
                 .FirstOrDefault();
 
+            if (user.Categories.Count == 0) return Ok();
+
             var cats = user.Categories.Select(item =>
             new UserCategoriesDto
             {

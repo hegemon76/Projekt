@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AddCategory } from 'src/app/_models/AddCategory';
 import { ToDoItem } from 'src/app/_models/ToDoItem';
 import { UserCategory } from 'src/app/_models/userCategory';
 import { CategoriesService } from 'src/app/_services/categories.service';
@@ -12,11 +13,16 @@ export class CategoriesListComponent implements OnInit {
   categories: UserCategory[];
   categoryItems: ToDoItem[];
   isCategoryDisplayed = false;
+  isCategoriesLoaded = false;
+  addCategoryToggle = false;
+  newCategory: any ={};
 
   constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
     this.loadCategories();
+    if(this.categories == null) this.isCategoriesLoaded = !this.isCategoriesLoaded;
+    console.log(this.categories);
   }
 
   loadCategories() {
@@ -38,6 +44,18 @@ export class CategoriesListComponent implements OnInit {
 
   cancelDisplayingItems(event: boolean){
     this.isCategoryDisplayed = event;
+  }
+
+  addCategory(){
+    this.categoriesService.addNewCategory(this.newCategory).subscribe(response =>{
+      console.log(response);
+    });
+    console.log(this.newCategory);
+  }
+
+  toggleAddCategory(){
+    this.addCategoryToggle = !this.addCategoryToggle;
+    this.loadCategories();
   }
 
 }
