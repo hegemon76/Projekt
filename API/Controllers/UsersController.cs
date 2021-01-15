@@ -36,13 +36,20 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
+            //var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
+            //    .Include(t => t.ToDoItems)
+            //    .ThenInclude(c => c.Category)
+            //    .Include(x => x.Categories)
+            //    .FirstOrDefaultAsync();
+
+            //return await user;
             var user = _contex.Users.First(x => x.Id == id);
 
             return await _contex.Users.FindAsync(id);
 
         }
 
-
+        //[Authorize]
         [HttpGet("{username}/categories")]
         public ActionResult<List<UserCategoriesDto>> GetUserCategories(string username)
         {
@@ -72,6 +79,23 @@ namespace API.Controllers
                 Description = item.Description,
                 Category = item.Category.Name,
                 Created = item.CreatedAt.ToString("f")
+            }).ToList();
+
+            return todos;
+        }
+
+        [HttpGet("user/{category}")]
+        public async Task<ActionResult<List<ToDoItemFromCategoryDto>>> GetCategoryItems(string category)
+        {
+            var _category = await _contex.Categories
+                .Where(x => x.Name.ToLower() == category.ToLower())
+                .Include(t => t.ToDoItems)
+                .FirstOrDefaultAsync();
+            var todos = _category.ToDoItems.Select(item =>
+            new ToDoItemFromCategoryDto
+            {
+                Description = item.Description,
+                CreatedAt = item.CreatedAt.ToString("f")
             }).ToList();
 
             return todos;
