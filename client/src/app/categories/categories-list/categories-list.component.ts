@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToDoItem } from 'src/app/_models/ToDoItem';
-import { UserCategory } from 'src/app/_models/userCategories';
+import { UserCategory } from 'src/app/_models/userCategory';
 import { CategoriesService } from 'src/app/_services/categories.service';
 
 @Component({
