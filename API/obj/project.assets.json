@@ -7740,23 +7740,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Myszków\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\jbahr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\uczelnia\\3 Rok\\Programowanie zaawansowane\\Projekt\\Projekt\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\jbahr\\source\\repos\\Projekt\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\uczelnia\\3 Rok\\Programowanie zaawansowane\\Projekt\\Projekt\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\Myszków\\.nuget\\packages\\",
-      "outputPath": "D:\\uczelnia\\3 Rok\\Programowanie zaawansowane\\Projekt\\Projekt\\API\\obj\\",
+      "projectPath": "C:\\Users\\jbahr\\source\\repos\\Projekt\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\jbahr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jbahr\\source\\repos\\Projekt\\API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Myszków\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jbahr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
