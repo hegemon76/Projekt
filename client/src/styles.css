@@ -448,15 +448,19 @@ textarea {
 body {
   background-color: #1f2833;
   font-family: "Poppins";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 300px;
+  box-sizing: border-box;
 }
 
 h1 {
   color: #45a29e;
   font-size: 48px;
+  font-weight: bold;
+}
+h2 {
+  color: #45a29e;
+  font-size: 38px;
   font-weight: bold;
 }
 
@@ -538,7 +542,7 @@ a {
   width: 50%;
 }
 
-.login-form input {
+.default-input {
   background-color: #333;
   border: 2px solid #45a29e;
   outline: 0;
@@ -547,7 +551,7 @@ a {
   box-shadow: 0 2px 8px #000;
 }
 
-.login-form button {
+.blue-button {
   background-color: #45a29e;
   color: #fff;
   padding: 10px;
@@ -576,4 +580,97 @@ a {
 
 .container {
   margin-top: 0 !important;
+}
+
+.register .default-input {
+  margin: 10px 0;
+}
+
+.register,
+.register-form {
+  width: 400px;
+  text-align: center;
+}
+
+.register-form h1 {
+  margin-bottom: 30px;
+}
+
+.register input {
+  width: 80%;
+}
+
+.register-form button {
+  margin: 10px 0;
+  width: 80%;
+}
+
+.task-list-container {
+  width: 800px;
+  min-height: 600px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 400px;
+}
+
+.task-list-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.task-list-container form .row {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.task-list-container form .row input,
+.task-list-container form .row select {
+  width: 80%;
+  margin: 0 auto;
+}
+.task-list-container form .button {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+.task-list-container form .button button {
+  width: 40%;
+}
+.task-list-container form .row .col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.task-list-container ul {
+  margin: 40px 0;
+}
+
+.task-display-container {
+  color: #fff;
+  width: 100%;
+}
+.task-display-container .list-group-item .task-data {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+.task-display-container .list-group-item .task-data .col {
+  width: 31%;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #45a29e;
+  outline: 1px solid #45a29e;
 }

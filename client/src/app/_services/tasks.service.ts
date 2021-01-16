@@ -19,6 +19,7 @@ export class TasksService {
 
   addItem(item: any){
     var user = JSON.parse(localStorage.getItem('user')).username;
+    item.UserName= user;
     return this.http.post(this.baseUrl + 'todoitems', item);
   }
 }

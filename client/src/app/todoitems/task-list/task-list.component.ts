@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { createToDoItem } from 'src/app/_models/createToDoItem';
 import { ToDoItem } from 'src/app/_models/ToDoItem';
 import { UserCategory } from 'src/app/_models/userCategory';
@@ -15,6 +16,7 @@ export class TaskListComponent implements OnInit {
   categories: UserCategory[];
   createItem: any = {};
   addItemMode = false;
+  selectedCategory: string;
 
   constructor(private taskService: TasksService, private categoryService: CategoriesService) { }
 
@@ -42,8 +44,16 @@ export class TaskListComponent implements OnInit {
   }
 
   addNewItem(){
-    console.log(this.createItem);
-    //this.taskService.addItem(this.createItem).subscribe();
+    this.createItem.categoryName = this.selectedCategory;
+    this.taskService.addItem(this.createItem).subscribe();
+    this.loadToDoItems();
   }
+
+  selectCategoryChange(event :any){
+    this.selectedCategory = event.target.value;
+    console.log(this.selectedCategory);
+  }
+
+  
 
 }

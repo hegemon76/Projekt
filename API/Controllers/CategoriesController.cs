@@ -39,7 +39,15 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryDto>> AddCategory(CategoryDto categoryDto)
         {
-            var user = _context.Users.FirstOrDefault(x => x.UserName.ToLower() == categoryDto.UserName.ToLower());
+            var user = _context.Users
+                .Include(c => c.Categories)
+                .FirstOrDefault(x => x.UserName.ToLower() == categoryDto.UserName.ToLower());
+            
+            var newCat = user.Categories
+                .Exists(x => x.Name.ToLower() == categoryDto.Name.ToLower());
+
+            if (newCat) return Conflict();
+
             var category = new Category
             {
                 AppUser = user,

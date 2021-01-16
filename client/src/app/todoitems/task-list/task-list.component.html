@@ -1,32 +1,13 @@
-<div class="container">
-    <h1 class="col-12 text-center">Tasks</h1>
-    <div *ngIf="!addItemMode">
-        <div class="button mb-4">
-            <button class="btn btn-primary" (click)="addItemToggle()">Add task</button>
-        </div>
-        <div class="row align-items-center col-12">
-            <ul class="list-group">
-                <li class="list-group-item" *ngFor="let todos of todoitems">
-                    <div class="row justify-content-md-auto">
-                        <div class="col-6 text-center">{{ todos.description }}</div>
-                        <div class="col-3"> {{ todos.created }}</div>
-                        <div class="col-3"> {{ todos.category }} </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="container task-list-container" style="margin: 0 auto;">
+    <h1 class="col-12 text-center" style="margin-bottom: 30px;">Zadania</h1>
 
-    <div *ngIf="addItemMode">
-        <div class="button mb-4">
-            <button class="btn btn-primary" (click)="addItemToggle()">Powrót</button>
-        </div>
+    <div *ngIf="addItemMode" class="tsk-container">
         <form #createToDoItemForm="ngForm" (ngSubmit)="addNewItem()">
             <div class="row">
               <div class="col">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Zadanie</label>
                 <input type="text" 
-                class="form-control" 
+                class="form-control default-input" 
                 name="description" 
                 [(ngModel)]="createItem.description"
                 placeholder="Co masz do zrobienia?">
@@ -34,18 +15,36 @@
               <div class="col">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Kategoria</label>
                 <select 
-                class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                  <option disabled>Wybierz kategorie...</option>
-                  <option name="categoryName" 
-                  [(ngModel)]="createItem.categoryName"  
+                class="custom-select mr-sm-2 default-input" id="inlineFormCustomSelect"
+                (change)="selectCategoryChange($event)">
+                  <option disabled selected>Wybierz kategorie...</option>
+                  <option [value]="category.category"
                   *ngFor="let category of categories" 
                    >{{category.category}}</option>
                 </select>
               </div>
             </div>
-            <div class="button mt-3">
-                <button class="btn btn-primary" type="submit">Wyślij</button>
+            <div class="button mb-4">
+                <button class="btn btn-primary blue-button" (click)="addItemToggle()">Powrót</button>
+                <button class="btn btn-primary blue-button" type="submit">Wyślij</button>
             </div>
           </form>
     </div>
+
+    <div class="button mb-4" style="width:100%">
+        <div *ngIf="!addItemMode" style="width:100%">
+        <button class="btn btn-primary blue-button" (click)="addItemToggle()">Dodaj zadanie</button>
+    </div>
+    <div class="task-display-container">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let todos of todoitems">
+                <div class="task-data">
+                    <div class="col col-6 text-center">{{ todos.description }}</div>
+                    <div class="col col-3"> {{ todos.created }}</div>
+                    <div class="col col-3"> {{ todos.category }} </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 </div>
