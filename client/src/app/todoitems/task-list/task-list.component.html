@@ -34,10 +34,10 @@
               <div class="col">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Kategoria</label>
                 <select 
-                class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                  <option disabled>Wybierz kategorie...</option>
-                  <option name="categoryName" 
-                  [(ngModel)]="createItem.categoryName"  
+                class="custom-select mr-sm-2" id="inlineFormCustomSelect"
+                (change)="selectCategoryChange($event)">
+                  <option disabled selected>Wybierz kategorie...</option>
+                  <option [value]="category.category"
                   *ngFor="let category of categories" 
                    >{{category.category}}</option>
                 </select>
