@@ -46,13 +46,16 @@ namespace API.Controllers
 
         // PUT: api/ToDoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{id}")]
-        public async Task<IActionResult> CompleteJob(int id)
+        [HttpPost("{username}/{id}")]
+        public async Task<ActionResult<ToDoItem>> CompleteJob(string username, int id)
         {
-            var modifyItem = _context.ToDoItems.Find(id);
+            var user = _context.Users.Include(t => t.ToDoItems)
+                .FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+            var toDoItem = user.ToDoItems.FirstOrDefault(x => x.Id == id);
 
 
-            if (modifyItem == null)
+            if (user == null)
             {
                 return BadRequest();
             }
@@ -60,13 +63,13 @@ namespace API.Controllers
             // _context.Entry(modifyItem).State = EntityState.Modified;
 
 
-            modifyItem.IsDone = !modifyItem.IsDone;
+            toDoItem.IsDone = !toDoItem.IsDone;
 
             _context.SaveChanges();
 
 
 
-            return Ok();
+            return toDoItem;
         }
 
         // POST: api/ToDoItems

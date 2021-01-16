@@ -82,6 +82,7 @@ namespace API.Controllers
             var todos = user.ToDoItems.Select(item =>
             new ToDoItemDto
             {
+                IsCompleted = item.IsDone,
                 Id = item.Id,
                 Description = item.Description,
                 Category = item.Category.Name,
