@@ -46,33 +46,27 @@ namespace API.Controllers
 
         // PUT: api/ToDoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutToDoItem(int id, ToDoItem toDoItem)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> CompleteJob(int id)
         {
-            if (id != toDoItem.Id)
+            var modifyItem = _context.ToDoItems.Find(id);
+
+
+            if (modifyItem == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(toDoItem).State = EntityState.Modified;
+            // _context.Entry(modifyItem).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ToDoItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+            modifyItem.IsDone = !modifyItem.IsDone;
+
+            _context.SaveChanges();
+
+
+
+            return Ok();
         }
 
         // POST: api/ToDoItems

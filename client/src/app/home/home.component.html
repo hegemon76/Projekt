@@ -1,9 +1,11 @@
 <div *ngIf="!isLoggedIn" class="container mt-5">
     <div *ngIf="!registerMode" style='text-align: center' class="wrapper">
         <h1>Witaj to aplikacji ToDo</h1>
-        <p class="lead">Jeżeli chcesz poprawić organizację swojego czasu zaloguj się a jeśli nie posiadasz jeszcze konta, możesz się śmiało zarejestrować</p>
+        <p class="lead">Jeżeli chcesz poprawić organizację swojego czasu zaloguj się a jeśli nie posiadasz jeszcze
+            konta, możesz się śmiało zarejestrować</p>
         <div class="text-center">
-            <button (click)="registerToggle()" class="blue-button btn btn-primary btn-lg mr-2" style="margin-top: 20px;">Zarejestruj się</button>
+            <button (click)="registerToggle()" class="blue-button btn btn-primary btn-lg mr-2"
+                style="margin-top: 20px;">Zarejestruj się</button>
         </div>
         <!--<div class="text-center">
             <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Zarejestruj się</button>
@@ -20,5 +22,5 @@
 </div>
 
 <div *ngIf="isLoggedIn" class="container">
-<p>SIema po rejstracji</p>
+    <p>SIema po rejstracji</p>
 </div>

@@ -35,10 +35,11 @@
     <div class="task-display-container">
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let todos of todoitems">
-          <div class="task-data">
+          <div class="task-data" (click)="endJob(todos.id)" >
             <div class="col col-6 text-center">{{ todos.description }} </div>
             <div class="col col-3"> {{ todos.created }} </div>
             <div class="col col-3"> {{ todos.category }} </div>
+            <div class="col col-3"> {{ todos.isCompleted }} </div>
           </div>
         </li>
       </ul>

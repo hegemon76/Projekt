@@ -12,6 +12,10 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
+  completeTask(taskId: any){
+    return this.http.post(this.baseUrl + 'ToDoItems/' + taskId, taskId);
+  }
+
   getTasks(){
     var user = JSON.parse(localStorage.getItem('user')).username;
     return this.http.get<ToDoItem[]>(this.baseUrl +'users/' +user +'/items');

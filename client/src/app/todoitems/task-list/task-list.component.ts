@@ -24,6 +24,13 @@ export class TaskListComponent implements OnInit {
     this.loadToDoItems();
   }
 
+  endJob(taskId:any){
+    this.taskService.completeTask(taskId).subscribe(response => {
+      if(response) this.ngOnInit();
+    });
+    
+  }
+
   loadToDoItems(){
     this.taskService.getTasks().subscribe(items => {
       this.todoitems = items;
@@ -45,9 +52,12 @@ export class TaskListComponent implements OnInit {
 
   addNewItem(){
     this.createItem.CategoryName = this.selectedCategory;
-    this.taskService.addItem(this.createItem).subscribe();
-    console.log(this.createItem);
-    this.loadToDoItems();
+    this.taskService.addItem(this.createItem).subscribe(response =>{
+      if(response){
+        this.loadToDoItems();
+      }
+    });
+    
   }
 
   selectCategoryChange(event :any){

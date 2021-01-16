@@ -4,4 +4,5 @@ export interface ToDoItem {
     created: string;
     category?:string;
     UserName?: string;
+    isCompleted?: boolean;
   }
