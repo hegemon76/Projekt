@@ -1,4 +1,5 @@
-<div *ngIf="!isCategoriesLoaded || !addCategoryToggle" class="container" style="width:800px;margin:0 auto">
+<!-- Dodawanie kategorii kategorii -->
+<div *ngIf="addCategoryToggle" class="container" style="width:800px;margin:0 auto">
   <form #categoryForm="ngForm" (ngSubmit)="addCategory()" autocomplete="off" style="text-align: center;">
     <h1 style="margin-bottom: 30px;">Dodaj kategorie </h1>
     <div class="form-group">
@@ -11,8 +12,9 @@
     </div>
   </form>
 </div>
-
-<div *ngIf="!isCategoriesLoaded || addCategoryToggle" class="container">
+            
+<!-- Wyswietlanie wszystkich kategorii -->
+<div *ngIf="!addCategoryToggle" class="container">
   <button class="btn btn-primary" (click)="toggleAddCategory()">Dodaj Kategorie</button>
   <div *ngIf="!isCategoryDisplayed" class="col-5">
     <ul *ngFor="let category of categories" class="list-group">
@@ -21,8 +23,10 @@
         {{ category.category }}
         <span class="badge badge-primary badge-pill">{{ category.toDos }}</span>
       </button>
+      <button (click)="deleteCategory(category.id)" >Usuń {{ category.id }}</button>
     </ul>
   </div>
+  <!-- Wyswietlanie wybranej kategorii -->
   <app-selected-category *ngIf="isCategoryDisplayed" 
   [toDosFromCategoriesList]="categoryItems"
     (back)="cancelDisplayingItems($event)">

@@ -28,4 +28,10 @@ export class CategoriesService {
     category.UserName = user;
     return this.http.post(this.baseUrl +'categories', category);
   }
+
+  deleteCategory(category: any){
+    var categoryId = category;
+    console.log(category);
+    return this.http.delete(this.baseUrl + "categories/" + categoryId, category);
+  }
 }

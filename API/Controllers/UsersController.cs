@@ -64,7 +64,8 @@ namespace API.Controllers
             new UserCategoriesDto
             {
                 Category = item.Name,
-                ToDos = item.ToDoItems.Count
+                ToDos = item.ToDoItems.Count,
+                Id = item.Id
             }).ToList();
 
             return cats;
