@@ -87,7 +87,7 @@ namespace API.Controllers
                 Description = item.Description,
                 Category = item.Category.Name,
                 Created = item.CreatedAt.ToString("f")
-            }).OrderByDescending(completed => completed.IsCompleted)
+            }).OrderBy(completed => completed.IsCompleted)
             .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)
                 .ToList();
