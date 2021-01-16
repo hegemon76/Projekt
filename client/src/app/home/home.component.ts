@@ -9,10 +9,14 @@ import { AccountService } from '../_services/account.service';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
+  isLoggedIn = false;
 
   constructor(accountService: AccountService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    var user = JSON.parse(localStorage.getItem('user')).username;
+    console.log(user);
+    if(user) this.isLoggedIn = true;
   }
 
   registerToggle() {

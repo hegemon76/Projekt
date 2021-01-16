@@ -81,6 +81,7 @@ namespace API.Controllers
             var todos = user.ToDoItems.Select(item =>
             new ToDoItemDto
             {
+                Id = item.Id,
                 Description = item.Description,
                 Category = item.Category.Name,
                 Created = item.CreatedAt.ToString("f")

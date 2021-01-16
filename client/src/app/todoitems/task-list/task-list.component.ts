@@ -44,14 +44,14 @@ export class TaskListComponent implements OnInit {
   }
 
   addNewItem(){
-    this.createItem.categoryName = this.selectedCategory;
+    this.createItem.CategoryName = this.selectedCategory;
     this.taskService.addItem(this.createItem).subscribe();
+    console.log(this.createItem);
     this.loadToDoItems();
   }
 
   selectCategoryChange(event :any){
     this.selectedCategory = event.target.value;
-    console.log(this.selectedCategory);
   }
 
   
