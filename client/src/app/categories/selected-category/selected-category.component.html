@@ -1,13 +1,13 @@
 <div class="container">
     <div class="button mb-4">
-        <button class="btn btn-primary" (click)="backToCategories()" >Powrót</button>
+        <button class="btn btn-primary blue-button" (click)="backToCategories()">Powrót</button>
     </div>
     <div class="row align-items-center">
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let todos of toDosFromCategoriesList">
-                <div class="row justify-content-md-auto">
-                    <div class="col-3">{{ todos.description }}</div>
-                    <div class="col-6"> {{ todos.createdAt }}</div>
+                <div class="row justify-content-md-auto" style="padding: 20px;text-align: center;">
+                    <div class="col-3" style="color:#fff; margin-bottom: 10px;">{{ todos.description }}</div>
+                    <div class="col-6" style="color:#fff; margin-bottom: 10px;"> {{ todos.createdAt }}</div>
                 </div>
             </li>
         </ul>

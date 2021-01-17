@@ -20,7 +20,7 @@
       </div>
       <div class="button mb-4">
         <button class="btn btn-primary blue-button" (click)="addItemToggle()">Powrót</button>
-        <button class="btn btn-primary blue-button" type="submit">Wyślij</button>
+        <button class="btn btn-primary blue-button task-reload" type="submit">Wyślij</button>
       </div>
     </form>
   </div>
@@ -32,12 +32,12 @@
     <div class="task-display-container">
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let todos of todoitems">
-          <div class="task-data" (click)="endJob(todos.id)"
+          <div class="task-data" style="align-items: center;" (click)="endJob(todos.id)"
             [ngStyle]="{'text-decoration':todos.isCompleted == true ? 'line-through' : ''}">
             <div class="col col-3 text-center"> {{ todos.description }} </div>
             <div class="col col-3"> {{ todos.created }} </div>
             <div class="col col-3"> {{ todos.category }} </div>
-            <div><button (click)="deleteTask(todos.id)" >Usun</button></div>
+            <div><button (click)="deleteTask(todos.id)" class="blue-button" >Usun</button></div>
           </div>
          
         </li>
