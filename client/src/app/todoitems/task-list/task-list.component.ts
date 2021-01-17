@@ -56,7 +56,7 @@ export class TaskListComponent implements OnInit {
     this.createItem.CategoryName = this.selectedCategory;
     this.taskService.addItem(this.createItem).subscribe(response =>{
       if(response){
-        this.loadToDoItems();
+        this.ngOnInit();
       }
     });
     

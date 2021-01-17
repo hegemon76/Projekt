@@ -62,14 +62,21 @@ namespace API.Controllers
 
             // _context.Entry(modifyItem).State = EntityState.Modified;
 
+            if(toDoItem.CompletedAt != null)
+            {
+                toDoItem.CompletedAt = null;
+                await _context.SaveChangesAsync();
+                return toDoItem;
+            }
 
             toDoItem.IsDone = !toDoItem.IsDone;
+            toDoItem.CompletedAt = DateTime.Now;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
 
 
-            return toDoItem;
+            return  toDoItem;
         }
 
         // POST: api/ToDoItems

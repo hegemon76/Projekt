@@ -80,15 +80,18 @@ namespace API.Controllers
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault();
 
-            var todos = user.ToDoItems.Select(item =>
-            new ToDoItemDto
-            {
-                IsCompleted = item.IsDone,
-                Id = item.Id,
-                Description = item.Description,
-                Category = item.Category.Name,
-                Created = item.CreatedAt.ToString("f")
-            }).OrderBy(completed => completed.IsCompleted)
+            
+            var todos = user.ToDoItems
+                .Select(item =>
+                        new ToDoItemDto
+                        {
+                            IsCompleted = item.IsDone,
+                            Id = item.Id,
+                            Description = item.Description,
+                            Category = item.Category.Name,
+                            Created = item.CreatedAt.ToString("f"),
+                            Completed = item.CompletedAt.ToString()
+                        }).OrderBy(completed => completed.IsCompleted)
             .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)
                 .ToList();
@@ -99,14 +102,15 @@ namespace API.Controllers
         [HttpGet("{username}/completed/items")]
         public ActionResult<List<ToDoItemDto>> GetUserCompletedToDoItems(string username)
         {
-            var today = DateTime.Now;
             var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
                 .Include(c => c.ToDoItems)
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault();
 
+            var now = DateTime.Now.AddMinutes(2);
+
             var todos = user.ToDoItems
-                .Where(c => c.IsDone == true && c.CreatedAt.AddHours(2) <= today)
+                .Where(c => c.IsDone == true && now < c.CompletedAt)
                 .Select(item =>
                 new ToDoItemDto
                 {
@@ -114,7 +118,8 @@ namespace API.Controllers
                     Id = item.Id,
                     Description = item.Description,
                     Category = item.Category.Name,
-                    Created = item.CreatedAt.ToString("f")
+                    Created = item.CreatedAt.ToString("f"),
+                    Completed = item.CompletedAt.ToString()
                 }).OrderBy(completed => completed.IsCompleted)
             .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)

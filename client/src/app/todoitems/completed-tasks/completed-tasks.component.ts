@@ -19,6 +19,7 @@ export class CompletedTasksComponent implements OnInit {
   loadCompletedTasks(){
     this.taskService.getCompletedTasks().subscribe(response => {
       this.jobs = response;
+      console.log(response);
     })
   }
 

@@ -11,9 +11,11 @@ namespace API.Entities
         public bool IsDone { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CompletedAt { get; set; }
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
+        
     }
 }
