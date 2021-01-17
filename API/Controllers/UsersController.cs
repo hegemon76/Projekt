@@ -95,6 +95,33 @@ namespace API.Controllers
             return todos;
         }
 
+        [HttpGet("{username}/completed/items")]
+        public ActionResult<List<ToDoItemDto>> GetUserCompletedToDoItems(string username)
+        {
+            var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
+                .Include(c => c.ToDoItems)
+                .ThenInclude(x => x.Category)
+                .FirstOrDefault();
+
+            var todos = user.ToDoItems
+                .Where(c => c.IsDone == true)
+                .Select(item =>
+                new ToDoItemDto
+                {
+                    IsCompleted = item.IsDone,
+                    Id = item.Id,
+                    Description = item.Description,
+                    Category = item.Category.Name,
+                    Created = item.CreatedAt.ToString("f")
+                }).OrderBy(completed => completed.IsCompleted)
+            .ThenBy(x => x.Category)
+            .ThenBy(y => y.Created)
+                .ToList();
+
+
+            return todos;
+        }
+
         [HttpGet("user/{category}")]
         public async Task<ActionResult<List<ToDoItemFromCategoryDto>>> GetCategoryItems(string category)
         {
