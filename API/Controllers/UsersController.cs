@@ -80,8 +80,10 @@ namespace API.Controllers
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault();
 
-            
+            var now = DateTime.Now.AddMinutes(-2);
+
             var todos = user.ToDoItems
+                .Where(c => c.IsDone == false || DateTime.Compare(now, c.CompletedAt.GetValueOrDefault()) < 0)
                 .Select(item =>
                         new ToDoItemDto
                         {
@@ -120,7 +122,8 @@ namespace API.Controllers
                     Category = item.Category.Name,
                     Created = item.CreatedAt.ToString("f"),
                     Completed = item.CompletedAt.ToString()
-                }).OrderBy(completed => completed.IsCompleted)
+                })//.OrderBy(completed => completed.IsCompleted)
+                .OrderByDescending(date => date.Completed)
             .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)
                 .ToList();
