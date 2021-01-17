@@ -33,7 +33,7 @@
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let todos of todoitems">
           <div class="task-data" (click)="endJob(todos.id)"
-            [ngStyle]="{'text-decoration':todos.isCompleted == true ? 'line-through' : ''}">
+            [ngStyle]="{'text-decoration':todos.isCompleted === true ? 'line-through' : ''}">
             <div class="col col-3 text-center"> {{ todos.description }} </div>
             <div class="col col-3"> {{ todos.created }} </div>
             <div class="col col-3"> {{ todos.category }} </div>

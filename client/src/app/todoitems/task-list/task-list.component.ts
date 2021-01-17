@@ -27,6 +27,7 @@ export class TaskListComponent implements OnInit {
   endJob(taskId:any){
     this.taskService.completeTask(taskId).subscribe(response => {
       if(response != null){
+        console.log(response);
         this.ngOnInit();
       } 
     });
