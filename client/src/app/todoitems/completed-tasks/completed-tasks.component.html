@@ -1,1 +1,13 @@
-<p>completed-tasks works!</p>
+<div class="button mb-4" style="width:100%">
+    <div class="task-display-container">
+      <ul class="list-group">
+        <li class="list-group-item" style="transition:0.5s opacity;" *ngFor="let todos of jobs">
+          <div class="task-data">
+            <div class="col col-6 text-center">{{ todos.description }} </div>
+            <div class="col col-3"> {{ todos.created }} </div>
+            <div class="col col-3"> {{ todos.category }} </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>

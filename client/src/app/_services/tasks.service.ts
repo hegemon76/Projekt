@@ -19,6 +19,11 @@ export class TasksService {
     return this.http.post(this.baseUrl + 'ToDoItems/' + body.username + '/' + taskId, body);
   }
 
+  getCompletedTasks(){
+    var user = JSON.parse(localStorage.getItem('user')).username;
+    return this.http.get<ToDoItem[]>(this.baseUrl + 'users/' + user + '/completed/items');
+  }
+
   getTasks(){
     var user = JSON.parse(localStorage.getItem('user')).username;
     return this.http.get<ToDoItem[]>(this.baseUrl +'users/' +user +'/items');

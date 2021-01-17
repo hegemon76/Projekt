@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -98,13 +99,14 @@ namespace API.Controllers
         [HttpGet("{username}/completed/items")]
         public ActionResult<List<ToDoItemDto>> GetUserCompletedToDoItems(string username)
         {
+            var today = DateTime.Now;
             var user = _contex.Users.Where(u => u.UserName.ToLower() == username.ToLower())
                 .Include(c => c.ToDoItems)
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault();
 
             var todos = user.ToDoItems
-                .Where(c => c.IsDone == true)
+                .Where(c => c.IsDone == true && c.CreatedAt.AddHours(2) <= today)
                 .Select(item =>
                 new ToDoItemDto
                 {
@@ -117,6 +119,7 @@ namespace API.Controllers
             .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)
                 .ToList();
+
 
 
             return todos;
