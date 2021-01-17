@@ -7,7 +7,7 @@
         <li class="list-group-item" style="transition:0.5s opacity; width: 100%;" *ngFor="let todos of jobs">
           <div class="task-data" style="display:flex;align-items: center;">
             <div class="col col-6 text-center">{{ todos.description }} </div>
-            <div class="col col-3"> {{ todos.created }} </div>
+            <div class="col col-3"> {{ todos.completed }} </div>
             <div class="col col-3"> {{ todos.category }} </div>
             <button (click) = "deleteTask(todos.id)" class="blue-button">Usun</button>
           </div>
