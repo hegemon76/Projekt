@@ -8,9 +8,6 @@
             <button (click)="registerToggle()" class="blue-button btn btn-primary btn-lg mr-2"
                 style="margin-top: 20px;">Zarejestruj się</button>
         </div>
-        <!--<div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Zarejestruj się</button>
-        </div>-->
     </div>
 <!-- Rejstracja -->
     <div *ngIf="registerMode" class="container">
@@ -21,7 +18,7 @@
         </div>
     </div>
 </div>
-<!-- Po rejstracji ta templatka -->
-<div *ngIf="isLoggedIn" class="container">
-    <p>SIema po rejstracji</p>
+
+<div *ngIf="isLoggedIn" class="container" style="text-align: center;">
+    <h1>SIema po rejstracji</h1>
 </div>

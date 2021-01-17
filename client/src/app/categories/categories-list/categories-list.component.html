@@ -14,16 +14,16 @@
 </div>
             
 <!-- Wyswietlanie wszystkich kategorii -->
-<div *ngIf="!addCategoryToggle" class="container">
-  <button class="btn btn-primary" (click)="toggleAddCategory()">Dodaj Kategorie</button>
+<div *ngIf="!addCategoryToggle" class="container" style="text-align: center;">
+  <button class="btn btn-primary blue-button" style="margin: 30px; width: 400px;" (click)="toggleAddCategory()">Dodaj Kategorie</button>
   <div *ngIf="!isCategoryDisplayed" class="col-5">
-    <ul *ngFor="let category of categories" class="list-group">
-      <button type="button" (click)="loadCategoryItems(category.category)"
-        class="list-group-item d-flex justify-content-between align-items-center">
+    <ul *ngFor="let category of categories" style="margin-bottom: 20px;" class="list-group">
+      <button type="button" style="width: 190px;margin: 0 10px;color:#45a29e;background-color: #fff;" (click)="loadCategoryItems(category.category)"
+        class="list-group-item d-flex justify-content-between align-items-center blue-button">
         {{ category.category }}
         <span class="badge badge-primary badge-pill">{{ category.toDos }}</span>
       </button>
-      <button (click)="deleteCategory(category.id)" >Usuń</button>
+      <button (click)="deleteCategory(category.id)" style="width: 190px;margin: 0 10px;" class="blue-button">Usuń</button>
     </ul>
   </div>
   <!-- Wyswietlanie wybranej kategorii -->
