@@ -18,17 +18,17 @@ window.onload = () => {
     });
   });
 
-  tasks.map((el) => {
-    el.addEventListener("mouseover", () => {
-      tasks.map((innerEl) => {
-        innerEl.style.opacity = 0.2;
-      });
-      el.style.opacity = 1;
-    });
-    el.addEventListener("mouseout", () => {
-      tasks.map((innerEl) => {
-        innerEl.style.opacity = 1;
-      });
-    });
-  });
+  // tasks.map((el) => {
+  //   el.addEventListener("mouseover", () => {
+  //     tasks.map((innerEl) => {
+  //       innerEl.style.opacity = 0.2;
+  //     });
+  //     el.style.opacity = 1;
+  //   });
+  //   el.addEventListener("mouseout", () => {
+  //     tasks.map((innerEl) => {
+  //       innerEl.style.opacity = 1;
+  //     });
+  //   });
+  // });
 };

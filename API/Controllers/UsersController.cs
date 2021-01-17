@@ -107,10 +107,10 @@ namespace API.Controllers
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault();
 
-            var now = DateTime.Now.AddMinutes(2);
+            var now = DateTime.Now.AddMinutes(-2);
 
             var todos = user.ToDoItems
-                .Where(c => c.IsDone == true && now < c.CompletedAt)
+                .Where(c => c.IsDone == true && DateTime.Compare(now,c.CompletedAt.GetValueOrDefault()) > 0 )
                 .Select(item =>
                 new ToDoItemDto
                 {

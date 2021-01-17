@@ -129,16 +129,21 @@ namespace API.Controllers
         }
 
         // DELETE: api/ToDoItems/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteToDoItem(int id)
+        [HttpDelete("{username}/{id}")]
+        public async Task<ActionResult<ToDoItem>> DeleteToDoItem(int id, string username)
         {
+            var user = _context.Users
+                .Include(c => c.Categories)
+                .FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+            
             var toDoItem = await _context.ToDoItems.FindAsync(id);
             if (toDoItem == null)
             {
                 return NotFound();
             }
-
             _context.ToDoItems.Remove(toDoItem);
+            
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -148,5 +153,7 @@ namespace API.Controllers
         {
             return _context.ToDoItems.Any(e => e.Id == id);
         }
+
+
     }
 }

@@ -19,6 +19,13 @@ export class TasksService {
     return this.http.post(this.baseUrl + 'ToDoItems/' + body.username + '/' + taskId, body);
   }
 
+  deleteTask(taskId: any){
+    var body:any={};
+    body.id = taskId;
+    body.username = JSON.parse(localStorage.getItem('user')).username;
+    return this.http.delete(this.baseUrl + 'ToDoItems/' + body.username + '/' + taskId, body);
+  }
+
   getCompletedTasks(){
     var user = JSON.parse(localStorage.getItem('user')).username;
     return this.http.get<ToDoItem[]>(this.baseUrl + 'users/' + user + '/completed/items');

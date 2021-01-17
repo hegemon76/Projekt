@@ -19,7 +19,12 @@ export class CompletedTasksComponent implements OnInit {
   loadCompletedTasks(){
     this.taskService.getCompletedTasks().subscribe(response => {
       this.jobs = response;
-      console.log(response);
+    })
+  }
+
+  deleteTask(taskId: any){
+    this.taskService.deleteTask(taskId).subscribe(response =>{
+      this.ngOnInit();
     })
   }
 

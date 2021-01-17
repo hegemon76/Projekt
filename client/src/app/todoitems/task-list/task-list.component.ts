@@ -26,16 +26,23 @@ export class TaskListComponent implements OnInit {
 
   endJob(taskId:any){
     this.taskService.completeTask(taskId).subscribe(response => {
-      if(response){
+      if(response != null){
         this.ngOnInit();
       } 
     });
-    
+  }
+
+  deleteTask(taskId: any){
+    this.taskService.deleteTask(taskId).subscribe(response =>{
+      this.ngOnInit();
+    })
   }
 
   loadToDoItems(){
     this.taskService.getTasks().subscribe(items => {
-      this.todoitems = items;
+      if(items){
+        this.todoitems = items;
+      }
     });
   }
 
