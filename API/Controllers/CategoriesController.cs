@@ -98,7 +98,7 @@ namespace API.Controllers
 
         // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
             var category = await _context.Categories.Include(t => t.ToDoItems).FirstAsync(c => c.Id == id);
 
@@ -106,7 +106,7 @@ namespace API.Controllers
 
             _context.SaveChanges();
 
-            return Ok();
+            return true;
         }
     }
 }
