@@ -1,4 +1,4 @@
-<div class="container task-list-container" style="margin: 0 auto;">
+<div class="container task-list-container" style="margin: 0 auto; width:1000px">
   <h1 class="col-12 text-center" style="margin-bottom: 30px;">Zadania</h1>
   <!-- DOdawanie itemka -->
   <div *ngIf="addItemMode" class="tsk-container">
@@ -31,13 +31,18 @@
     </div>
     <div class="task-display-container">
       <ul class="list-group">
+        <li style="display: flex;justify-content: space-between;width: 100%;margin: 0 auto;">
+          <div class="task-data" style="align-items: center;display: flex;width: 100%;">
+            <div class="col" style="width: 25%;margin-bottom: 20px;font-size: 24px;">Opis</div><div class="col" style="width: 25%;margin-bottom: 20px;font-size: 24px;">Data utworzenia</div><div class="col" style="width: 25%;margin-bottom: 20px;font-size: 24px;">Kategoria</div><div style="width: 25%;" ></div>
+          </div>
+        </li>
         <li class="list-group-item" *ngFor="let todos of todoitems">
           <div class="task-data" style="align-items: center;" (click)="endJob(todos.id)"
             [ngStyle]="{'text-decoration':todos.isCompleted == true ? 'line-through' : ''}">
-            <div class="col col-3 text-center"> {{ todos.description }} </div>
-            <div class="col col-3"> {{ todos.created }} </div>
-            <div class="col col-3"> {{ todos.category }} </div>
-            <div><button (click)="deleteTask(todos.id)" class="blue-button" >Usun</button></div>
+            <div class="col col-3 text-center" style="width: 25%;"> {{ todos.description }} </div>
+            <div class="col col-3" style="width: 25%;"> {{ todos.created }} </div>
+            <div class="col col-3" style="width: 25%;"> {{ todos.category }} </div>
+            <div style="width: 25%;"><button (click)="deleteTask(todos.id)" class="blue-button" >Usun</button></div>
           </div>
          
         </li>

@@ -16,6 +16,9 @@
 <!-- Wyswietlanie wszystkich kategorii -->
 <div *ngIf="!addCategoryToggle" class="container" style="text-align: center;">
   <button class="btn btn-primary blue-button" style="margin: 30px; width: 400px;" (click)="toggleAddCategory()">Dodaj Kategorie</button>
+  <div class="task-data" style="align-items: center;display: flex;width: 100%;color:#fff;display: flex;justify-content: center;">
+    <div class="col" style="width: 25%;margin-bottom: 20px;font-size: 24px;margin-left: -200px;">Nazwa</div>
+  </div>
   <div *ngIf="!isCategoryDisplayed" class="col-5">
     <ul *ngFor="let category of categories" style="margin-bottom: 20px;" class="list-group">
       <button type="button" style="width: 190px;margin: 0 10px;color:#45a29e;background-color: #fff;" (click)="loadCategoryItems(category.category)"
