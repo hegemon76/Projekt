@@ -10,7 +10,7 @@
                     <a class="nav-link" routerLink='/tasks' >Zadania</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Skończone</a>
+                    <a class="nav-link" routerLink='/completed-tasks'>Skończone</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink='/categories'>Kategorie</a>
@@ -21,8 +21,8 @@
         <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>Witaj {{ currentUserUsername }}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
-                <a class="dropdown-item">Edit profile</a>
-                <div class="dropdown-divider"></div>
+                <!-- <a class="dropdown-item">Edit profile</a>
+                <div class="dropdown-divider"></div> -->
                 <a class="dropdown-item" (click)="logout()">Wyloguj się</a>
             </div>
         </div>

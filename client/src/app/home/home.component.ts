@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit {
   constructor(accountService: AccountService) { }
 
   ngOnInit() {
-    var user = JSON.parse(localStorage.getItem('user')).username;
-    console.log(user);
-    if(user) this.isLoggedIn = true;
+    if(localStorage.length != 0)
+    {
+      var user = JSON.parse(localStorage.getItem('user')).username
+      this.isLoggedIn = true;
+    }
+    
   }
 
   registerToggle() {

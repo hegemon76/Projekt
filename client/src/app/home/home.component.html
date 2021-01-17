@@ -1,3 +1,4 @@
+<!-- Strona bez zarejstrowanego usera -->
 <div *ngIf="!isLoggedIn" class="container mt-5">
     <div *ngIf="!registerMode" style='text-align: center' class="wrapper">
         <h1>Witaj to aplikacji ToDo</h1>
@@ -11,7 +12,7 @@
             <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Zarejestruj się</button>
         </div>-->
     </div>
-
+<!-- Rejstracja -->
     <div *ngIf="registerMode" class="container">
         <div class="row justify-content-center">
             <div class="col-4">
@@ -20,7 +21,7 @@
         </div>
     </div>
 </div>
-
+<!-- Po rejstracji ta templatka -->
 <div *ngIf="isLoggedIn" class="container">
     <p>SIema po rejstracji</p>
 </div>

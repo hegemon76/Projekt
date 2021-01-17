@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
@@ -12,16 +13,21 @@ export class NavComponent implements OnInit {
   model: any={}
   currentUserUsername = '';
 
-  constructor(public accountService: AccountService) { }
+  constructor(
+    public accountService: AccountService,
+    private router: Router ) { }
 
-  ngOnInit(): void {
-    var user = JSON.parse(localStorage.getItem('user'));
-    this.currentUserUsername = user.username
+  ngOnInit() {
+    if(localStorage.length != 0){
+      var user = JSON.parse(localStorage.getItem('user')).username;
+      this.currentUserUsername = user;
+    }
   }
 
   login(){
     this.accountService.login(this.model).subscribe(response => {
       this.currentUserUsername = this.model.username;
+        window.location.reload();
     }, error => {
       console.log(error);
     });
@@ -29,7 +35,9 @@ export class NavComponent implements OnInit {
 
   logout(){
     this.currentUserUsername = '';
-    this.accountService.logout();
+    this.accountService.logout()
+    this.router.navigate(['']);
+    window.location.reload();
   }
 
 
