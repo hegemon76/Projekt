@@ -64,7 +64,8 @@ namespace API.Controllers
             new UserCategoriesDto
             {
                 Category = item.Name,
-                ToDos = item.ToDoItems.Count
+                ToDos = item.ToDoItems.Count,
+                Id = item.Id
             }).ToList();
 
             return cats;
@@ -81,10 +82,13 @@ namespace API.Controllers
             var todos = user.ToDoItems.Select(item =>
             new ToDoItemDto
             {
+                IsCompleted = item.IsDone,
+                Id = item.Id,
                 Description = item.Description,
                 Category = item.Category.Name,
                 Created = item.CreatedAt.ToString("f")
-            }).OrderBy(x => x.Category)
+            }).OrderBy(completed => completed.IsCompleted)
+            .ThenBy(x => x.Category)
             .ThenBy(y => y.Created)
                 .ToList();
 

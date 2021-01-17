@@ -1,5 +1,8 @@
 export interface ToDoItem {
+    id?: number;
     description: string;
-    createdAt: string;
+    created: string;
     category?:string;
+    UserName?: string;
+    isCompleted?: boolean;
   }

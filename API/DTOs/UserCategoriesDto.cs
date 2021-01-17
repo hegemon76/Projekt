@@ -10,5 +10,6 @@ namespace API.DTOs
     {
         public string Category { get; set; }
         public int ToDos { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -21,8 +21,13 @@ export class CategoriesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    if(this.categories == null) this.isCategoriesLoaded = !this.isCategoriesLoaded;
     console.log(this.categories);
+    if(this.categories == null) this.isCategoriesLoaded = !this.isCategoriesLoaded;
+  }
+
+  deleteCategory(category: any){
+    this.categoriesService.deleteCategory(category).subscribe();
+    this.ngOnInit();
   }
 
   loadCategories() {
@@ -48,9 +53,11 @@ export class CategoriesListComponent implements OnInit {
 
   addCategory(){
     this.categoriesService.addNewCategory(this.newCategory).subscribe(response =>{
-      console.log(response);
+      if(response) {
+        this.toggleAddCategory();
+        this.ngOnInit()
+      };
     });
-    console.log(this.newCategory);
   }
 
   toggleAddCategory(){
