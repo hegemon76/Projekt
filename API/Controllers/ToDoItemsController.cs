@@ -60,21 +60,19 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            // _context.Entry(modifyItem).State = EntityState.Modified;
 
-            if(toDoItem.CompletedAt != null)
+            if(toDoItem.IsDone == false)
             {
-                toDoItem.CompletedAt = null;
-                await _context.SaveChangesAsync();
-                return toDoItem;
+                toDoItem.IsDone = true;
+                toDoItem.CompletedAt = DateTime.Now;
+                _context.SaveChanges();
             }
-
-            toDoItem.IsDone = !toDoItem.IsDone;
-            toDoItem.CompletedAt = DateTime.Now;
-
-            await _context.SaveChangesAsync();
-
-
+            else
+            {
+                toDoItem.IsDone = false;
+                toDoItem.CompletedAt = null;
+                _context.SaveChanges();
+            }
 
             return  toDoItem;
         }

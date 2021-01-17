@@ -26,8 +26,12 @@ export class CategoriesListComponent implements OnInit {
   }
 
   deleteCategory(category: any){
-    this.categoriesService.deleteCategory(category).subscribe();
-    this.ngOnInit();
+    this.categoriesService.deleteCategory(category).subscribe(response => {
+      if(response){
+        this.ngOnInit();
+      }
+    });
+    
   }
 
   loadCategories() {
