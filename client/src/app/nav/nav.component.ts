@@ -35,7 +35,7 @@ export class NavComponent implements OnInit {
 
   logout(){
     this.currentUserUsername = '';
-    this.accountService.logout()
+    this.accountService.logout();
     this.router.navigate(['']);
     window.location.reload();
   }

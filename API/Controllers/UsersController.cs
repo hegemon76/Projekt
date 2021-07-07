@@ -128,11 +128,9 @@ namespace API.Controllers
             .ThenBy(y => y.Created)
                 .ToList();
 
-
-
             return todos;
         }
-
+        //[Authorize]
         [HttpGet("user/{category}")]
         public async Task<ActionResult<List<ToDoItemFromCategoryDto>>> GetCategoryItems(string category)
         {
